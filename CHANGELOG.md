@@ -7,3 +7,4 @@
   duplicate detection, file actions, previews, and diagnostics.
 - Added MCP resources and resource templates for search/count use cases.
 - Added C++23/CMake build, GitHub Actions CI, MIT license, and release packaging.
+- Added tag v2.0.0
