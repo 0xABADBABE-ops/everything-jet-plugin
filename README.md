@@ -310,9 +310,9 @@ The README uses this GitHub Actions status badge:
 
 ## License
 
-This repository does not currently include a standalone source license file.
-The Everything3 SDK remains subject to the licensing terms that ship with the SDK package you install.
-If you plan to publish this project publicly on GitHub, add a `LICENSE` file that matches how you want to distribute the source.
+MIT. See [LICENSE](LICENSE).
+
+The Everything3 SDK is not vendored by this repository and remains subject to the licensing terms that ship with the SDK package you install.
 
 ---
 
