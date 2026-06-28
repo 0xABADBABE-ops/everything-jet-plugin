@@ -1,20 +1,23 @@
-<p align="center">
-  <h1 align="center">⚡ everything-jet-plugin</h1>
-  <p align="center">A native C++ MCP server that exposes <a href="https://www.voidtools.com">Everything</a> instant file search to AI agents.</p>
-  <!-- Replace YOUR_GITHUB_USER after the first push. -->
-  <p align="center">
-    <a href="https://github.com/YOUR_GITHUB_USER/everything-jet-plugin/actions/workflows/ci.yml">
-      <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/YOUR_GITHUB_USER/everything-jet-plugin/ci.yml?branch=main&style=flat-square&label=%20&logo=github&logoColor=white" />
-    </a>
-  </p>
-  <p align="center">
-    <strong>C++23</strong> · <strong>13 Tools</strong> · <strong>MCP Resources</strong> · <strong>Zero External Dependencies</strong> · <strong>182 Tests</strong>
-  </p>
-</p>
+<div align="center">
+
+# ⚡ everything-jet-plugin
+
+Native C++23 MCP server for exposing [Everything](https://www.voidtools.com) 1.5 search to AI agents.
+
+<!-- Replace YOUR_GITHUB_USER after publishing the repository. -->
+[![CI](https://img.shields.io/github/actions/workflow/status/YOUR_GITHUB_USER/everything-jet-plugin/ci.yml?branch=main&style=flat-square&label=ci&logo=github)](https://github.com/YOUR_GITHUB_USER/everything-jet-plugin/actions/workflows/ci.yml)
+![C++23](https://img.shields.io/badge/C%2B%2B-23-00599C?style=flat-square&logo=cplusplus)
+![Windows](https://img.shields.io/badge/platform-Windows-0078D4?style=flat-square&logo=windows)
+![MCP](https://img.shields.io/badge/protocol-MCP-111827?style=flat-square)
+![Tests](https://img.shields.io/badge/tests-182%20passing-2ea043?style=flat-square)
+
+**13 tools** · **MCP resources** · **Everything3 SDK v3** · **Zero runtime dependencies**
+
+</div>
 
 ---
 
-## What is this?
+## Overview
 
 `everything-mcp` bridges the **voidtools Everything** file indexer (1.5) to AI assistants via the [Model Context Protocol](https://modelcontextprotocol.io) (MCP) over stdio. It lets your AI agent search, inspect, and interact with every file on your system — instantly.
 
@@ -27,8 +30,7 @@ No Node.js. No Python. No runtime dependencies. Just a single native executable 
 └────────────┘                └─────────────────────┘                     └──────────────┘
 ```
 
-> **SDK:** This repo uses the **Everything3 SDK v3** (`Everything3_x64.dll`, named-pipe IPC3).
-> Point CMake at the SDK with `EVERYTHING_SDK_DIR`, or keep it as a sibling folder at `../SDK-3.0.0.9`.
+> **SDK:** This project targets the **Everything3 SDK v3** (`Everything3_x64.dll`, named-pipe IPC3), not the legacy `Everything64.dll` SDK. Point CMake at the SDK with `EVERYTHING_SDK_DIR`, or keep it as a sibling folder at `../SDK-3.0.0.9`.
 
 ## Features
 
@@ -95,7 +97,7 @@ Standard search results exposed as native MCP resource URIs:
 | `everything://count/` | Static: Everything availability |
 | `everything://search/ext:pdf` | Static: all PDFs overview |
 
-## Installation
+## Quick Start
 
 ### Prerequisites
 
@@ -104,6 +106,34 @@ Standard search results exposed as native MCP resource URIs:
 - **Everything3 SDK v3.0.0.9+** (download from voidtools, extract locally)
 - **Visual Studio 2022** (MSVC 14.50+) with C++ CMake tools
 - **CMake 3.20+**
+
+### Build
+
+The simplest layout is:
+
+```text
+everything-ai/
+├── SDK-3.0.0.9/
+└── everything-jet-plugin/
+```
+
+From `everything-jet-plugin/`:
+
+```powershell
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+cmake --build build --config Release
+build\Release\everything-mcp-tests.exe
+```
+
+If the SDK is somewhere else:
+
+```powershell
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64 `
+  -DEVERYTHING_SDK_DIR="C:\path\to\SDK-3.0.0.9"
+cmake --build build --config Release
+```
+
+The executable and `Everything3_x64.dll` are placed in `build\Release\`.
 
 ### Everything setup (pipe de-elevation)
 
@@ -120,31 +150,6 @@ Everything must run **non-elevated** so the IPC3 named pipe is accessible to non
 
 If you get `ERROR_ACCESS_DENIED` connecting to the pipe, an elevated Everything process is holding it — kill it by PID (elevated) and restart non-elevated.
 
-### SDK setup
-
-This repository does not vendor the Everything3 SDK. Point CMake at your local SDK copy:
-
-```powershell
-# Option 1: one-off configure flag
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64 `
-  -DEVERYTHING_SDK_DIR="C:\path\to\SDK-3.0.0.9"
-
-# Option 2: environment variable
-$env:EVERYTHING_SDK_DIR="C:\path\to\SDK-3.0.0.9"
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64
-```
-
-If you keep the SDK next to this repo as `../SDK-3.0.0.9`, CMake will pick it up automatically.
-
-### Build
-
-```bash
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64
-cmake --build build --config Release
-```
-
-The executable and `Everything3_x64.dll` are placed in `build/Release/`.
-
 ### Register with your MCP client
 
 Add to your MCP client configuration (e.g., Qwen Code's `mcp_servers.json`):
@@ -159,7 +164,7 @@ Add to your MCP client configuration (e.g., Qwen Code's `mcp_servers.json`):
 }
 ```
 
-## Usage Examples
+## Usage
 
 ### Ask your AI agent
 
@@ -179,17 +184,17 @@ Add to your MCP client configuration (e.g., Qwen Code's `mcp_servers.json`):
 → { wasted_space: 8589934592, duplicate_groups: 47 }
 ```
 
-### Command-line
+### Command Line
 
-```bash
+```powershell
 # Run as stdio MCP server
-everything-mcp
+build\Release\everything-mcp.exe
 
 # Show help
-everything-mcp --help
+build\Release\everything-mcp.exe --help
 
 # Version
-everything-mcp --version
+build\Release\everything-mcp.exe --version
 ```
 
 ## Architecture
@@ -232,7 +237,7 @@ everything-jet-plugin/
 
 ## Testing
 
-```bash
+```powershell
 # Run all 182 tests against live Everything
 build\Release\everything-mcp-tests.exe
 ```
@@ -295,6 +300,14 @@ Test coverage includes:
 - **Journal watch** — `Everything3_ReadJournal` change stream (USN-based, callback-driven) replacing `ReadDirectoryChangesW`
 - **Search sessions** — stateful result sets with `refine_search`
 - **HTTP/ETP transport** — query remote Everything instances via built-in HTTP server
+
+## CI Badge
+
+After pushing to GitHub, replace `YOUR_GITHUB_USER` in the badge URL at the top of this README.
+
+```markdown
+[![CI](https://img.shields.io/github/actions/workflow/status/YOUR_GITHUB_USER/everything-jet-plugin/ci.yml?branch=main&style=flat-square&label=ci&logo=github)](https://github.com/YOUR_GITHUB_USER/everything-jet-plugin/actions/workflows/ci.yml)
+```
 
 ## License
 

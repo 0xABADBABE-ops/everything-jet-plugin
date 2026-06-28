@@ -19,19 +19,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Download Everything SDK
+      - name: Download Everything3 SDK
         shell: pwsh
         run: |
-          $zipPath = Join-Path $env:RUNNER_TEMP "Everything-SDK.zip"
-          $extractRoot = Join-Path $env:RUNNER_TEMP "everything-sdk"
-          Invoke-WebRequest "https://www.voidtools.com/Everything-SDK.zip" -OutFile $zipPath
+          $zipPath = Join-Path $env:RUNNER_TEMP "Everything-SDK-3.0.0.9.zip"
+          $extractRoot = Join-Path $env:RUNNER_TEMP "everything3-sdk"
+          Invoke-WebRequest "https://www.voidtools.com/Everything-SDK-3.0.0.9.zip" -OutFile $zipPath
           Expand-Archive -Path $zipPath -DestinationPath $extractRoot -Force
 
-          $sdkHeader = Get-ChildItem -Path $extractRoot -Recurse -Filter Everything.h |
+          $sdkHeader = Get-ChildItem -Path $extractRoot -Recurse -Filter Everything3.h |
             Select-Object -First 1 -ExpandProperty FullName
 
           if (-not $sdkHeader) {
-            throw "Everything.h was not found after extracting the SDK archive."
+            throw "Everything3.h was not found after extracting the SDK archive."
           }
 
           $sdkRoot = Split-Path (Split-Path $sdkHeader -Parent) -Parent
