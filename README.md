@@ -4,8 +4,7 @@
 
 Native C++23 MCP server for exposing [Everything](https://www.voidtools.com) 1.5 search to AI agents.
 
-<!-- Replace YOUR_GITHUB_USER after publishing the repository. -->
-[![CI](https://img.shields.io/github/actions/workflow/status/YOUR_GITHUB_USER/everything-jet-plugin/ci.yml?branch=main&style=flat-square&label=ci&logo=github)](https://github.com/YOUR_GITHUB_USER/everything-jet-plugin/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/0xabadbabe-ops/everything-jet-plugin/ci.yml?branch=main&style=flat-square&label=ci&logo=github)](https://github.com/0xabadbabe-ops/everything-jet-plugin/actions/workflows/ci.yml)
 ![C++23](https://img.shields.io/badge/C%2B%2B-23-00599C?style=flat-square&logo=cplusplus)
 ![Windows](https://img.shields.io/badge/platform-Windows-0078D4?style=flat-square&logo=windows)
 ![MCP](https://img.shields.io/badge/protocol-MCP-111827?style=flat-square)
@@ -303,10 +302,10 @@ Test coverage includes:
 
 ## CI Badge
 
-After pushing to GitHub, replace `YOUR_GITHUB_USER` in the badge URL at the top of this README.
+The README uses this GitHub Actions status badge:
 
 ```markdown
-[![CI](https://img.shields.io/github/actions/workflow/status/YOUR_GITHUB_USER/everything-jet-plugin/ci.yml?branch=main&style=flat-square&label=ci&logo=github)](https://github.com/YOUR_GITHUB_USER/everything-jet-plugin/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/0xabadbabe-ops/everything-jet-plugin/ci.yml?branch=main&style=flat-square&label=ci&logo=github)](https://github.com/0xabadbabe-ops/everything-jet-plugin/actions/workflows/ci.yml)
 ```
 
 ## License
