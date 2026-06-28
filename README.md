@@ -24,9 +24,9 @@ No Node.js. No Python. No runtime dependencies. Just a single native executable 
 
 ```
 ┌────────────┐     stdio      ┌─────────────────────┐    IPC3 named pipe   ┌──────────────┐
-│  AI Agent  │◄══════════════►│    everything-mcp   │◄═══════════════════►│  Everything  │
-│ (Qwen etc) │    JSON-RPC    │    (native C++23)   │   Everything3 SDK   │   1.5 index  │
-└────────────┘                └─────────────────────┘                     └──────────────┘
+│  AI Agent  │◄══════════════►│    everything-mcp   │◄═══════════════════► │  Everything  │
+│ (Qwen etc) │    JSON-RPC    │    (native C++23)   │   Everything3 SDK    │   1.5 index  │
+└────────────┘                └─────────────────────┘                      └──────────────┘
 ```
 
 > **SDK:** This project targets the **Everything3 SDK v3** (`Everything3_x64.dll`, named-pipe IPC3), not the legacy `Everything64.dll` SDK. Point CMake at the SDK with `EVERYTHING_SDK_DIR`, or keep it as a sibling folder at `../SDK-3.0.0.9`.
