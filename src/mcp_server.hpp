@@ -44,7 +44,7 @@ struct ResourceTemplateDef {
 
 struct ServerInfo {
     std::string name = "everything-mcp";
-    std::string version = "1.0.0";
+    std::string version = "2.0.0";
 };
 
 class McpServer {

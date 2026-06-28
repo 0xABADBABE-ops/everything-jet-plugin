@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
                 "  everything-mcp --help        Show this help\n"
                 "\n"
                 "Requires Everything (https://www.voidtools.com) to be running.\n"
-                "Everything64.dll must be in PATH or alongside this executable.\n"
+                "Everything3_x64.dll must be in PATH or alongside this executable.\n"
                 "\n"
                 "Tools exposed (13):\n"
                 "  search            Search files/folders with Everything syntax\n"
@@ -49,14 +49,14 @@ int main(int argc, char* argv[]) {
             return 0;
         }
         if (arg == "--version" || arg == "-v") {
-            std::printf("everything-mcp 1.0.0\n");
+            std::printf("everything-mcp 2.0.0\n");
             return 0;
         }
     }
 
     mcp::ServerInfo info;
     info.name = "everything-mcp";
-    info.version = "1.0.0";
+    info.version = "2.0.0";
 
     mcp::McpServer server(info);
     mcp::register_everything_tools(server);

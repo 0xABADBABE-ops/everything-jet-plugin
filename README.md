@@ -264,6 +264,19 @@ Test coverage includes:
 - **MCP protocol** — init gate, batch requests, resources, error handling
 - **Live SDK integration** — search, pagination, sort, count, version, empty queries
 
+## Releases
+
+Releases are tag-driven. Push a semantic version tag to build, test, package, and
+publish a Windows x64 release archive:
+
+```powershell
+git tag v2.0.0
+git push origin v2.0.0
+```
+
+The release archive contains `everything-mcp.exe`, `Everything3_x64.dll`,
+`README.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, and `CHANGELOG.md`.
+
 ## Requirements
 
 | Component | Version |

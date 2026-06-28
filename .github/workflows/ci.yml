@@ -24,7 +24,7 @@ jobs:
         run: |
           $zipPath = Join-Path $env:RUNNER_TEMP "Everything-SDK-3.0.0.9.zip"
           $extractRoot = Join-Path $env:RUNNER_TEMP "everything3-sdk"
-          Invoke-WebRequest "https://www.voidtools.com/Everything-SDK-3.0.0.9.zip" -OutFile $zipPath
+          Invoke-WebRequest "https://github.com/voidtools/everything_sdk3/releases/download/3.0.0.9/Everything-SDK-3.0.0.9.zip" -OutFile $zipPath
           Expand-Archive -Path $zipPath -DestinationPath $extractRoot -Force
 
           $sdkHeader = Get-ChildItem -Path $extractRoot -Recurse -Filter Everything3.h |
