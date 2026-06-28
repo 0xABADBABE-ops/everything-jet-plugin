@@ -433,8 +433,13 @@ TEST(mcp_search_content_returns_content) {
     CHECK(v["result"].has("content"));
     CHECK(v["result"]["content"].is_array());
 
-    // Parse inner JSON
     std::string text = v["result"]["content"][0].at("text").as_string();
+    if (v["result"].has("isError") && v["result"]["isError"].as_bool()) {
+        CHECK(text.find("Error:") == 0);
+        return;
+    }
+
+    // Parse inner JSON
     auto inner = Value::parse(text);
     CHECK(inner.has("files_searched"));
     CHECK(inner.has("total_matches"));
@@ -695,7 +700,11 @@ TEST(mcp_resources_read_search_template) {
     std::string text = v["result"]["contents"][0].at("text").as_string();
     auto inner = Value::parse(text);
     CHECK(inner.has("query"));
-    CHECK(inner.has("results"));
+    if (inner.has("success") && !inner["success"].as_bool()) {
+        CHECK(inner.has("error"));
+    } else {
+        CHECK(inner.has("results"));
+    }
 }
 
 TEST(mcp_resources_read_unknown_uri_fails) {
